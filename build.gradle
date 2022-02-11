@@ -1,0 +1,47 @@
+// 插件引入
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+//定义局部变量
+def bar = "bar"
+
+
+// 属性修改
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+// 定义扩展属性（给脚本用的脚本）
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+// 仓库定义
+repositories {
+    mavenCentral()
+}
+
+// 定义依赖
+// compileOnly：适用于编译期而不需要打包的情况
+// implementation：当其他模块依赖此模块时，此模块使用 implementation 声明的依赖包只限于模块内部使用，不允许其他模块使用。
+// compile：编译范围依赖在所有的classpath中可用，同时它们也会被打包。
+// providedCompile：war插件提供的范围类型:与compile作用类似,但不会被添加到最终的war包中这是由于编译、测试阶段代码需要依赖此类jar包，而运行阶段容器已经提供了相应的支持，所以无需将这些文件打入到war包中了;例如Servlet API就是一个很明显的例子.
+//
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// 自定义任务
+tasks.named('test') {
+    useJUnitPlatform()
+}
