@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'project-report'
 }
 
 //定义局部变量
@@ -45,3 +46,5 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
